@@ -156,18 +156,13 @@ export async function incrementViews(slug: string): Promise<number> {
 /** 获取总浏览量 */
 export async function getTotalViews(): Promise<number> {
   if (isKVAvailable()) {
-    // KV 模式下遍历所有 views: 前缀的 key 求和
+    // KV 模式：用 keys 方法获取所有 views 前缀的 key 并求和
+    const keys = await kv.keys("views:*");
     let total = 0;
-    let cursor: string | undefined;
-    do {
-      const result = await kv.scan(cursor, { match: "views:*", count: 100 });
-      cursor = result[0];
-      const keys = result[1];
-      for (const key of keys) {
-        const val = await kv.get<number>(key);
-        if (val) total += val;
-      }
-    } while (cursor !== "0");
+    for (const key of keys) {
+      const val = await kv.get<number>(key);
+      if (val) total += val;
+    }
     return total;
   }
 
