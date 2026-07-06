@@ -73,7 +73,7 @@ published: true
 
 使用 `![[文件名]]` 嵌入图片、视频等资源：
 
-- `![[screenshot.png]]` → 图片
+- `![screenshot](/images/screenshot.png)` → 图片
 - `![[demo.mp4]]` → 视频
 - `![[audio.mp3]]` → 音频
 

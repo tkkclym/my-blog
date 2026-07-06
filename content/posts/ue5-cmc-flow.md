@@ -65,7 +65,7 @@ if (bSendServerMove)
 
 現代标准流程确实是走的CallServerMovePacked，else分支知识为了兼容极其古老的遗留项目.
 如图：
-	![[CMC流程学习.png]]
+	![CMC流程学习](/images/CMC流程学习.png)
 那为什么要使用Packed呢？我们先来看看旧框架的痛点
 RPC爆炸和参数僵化 ）CallServerMove时代，客户端向服务端发送移动请求的时候，为了处理各种复杂网络环境会有一大堆重载的RPC函数，。**这非常致命！** 
 

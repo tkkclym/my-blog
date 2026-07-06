@@ -39,7 +39,7 @@ FOnAtmosphereIDChanged OnAtmosphereIDChanged;
   `UnLua` 通过反射系统，自动把 `FOnAtmosphereIDChanged` 这种 `FProperty` 类型的成员导出到` Lua`，包装成带` :Add() / :Remove() `方法的对象
   
 这个和我们的unlua中的系统是互补的关系：
-![[MsgEvent和C++中的动态委托对比.png]]
+![MsgEvent和C++中的动态委托对比](/images/MsgEvent和C++中的动态委托对比.png)
 
 有以下两个问题：
 

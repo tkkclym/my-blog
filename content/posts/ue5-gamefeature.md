@@ -15,7 +15,7 @@ published: true
 1. 插件中开启Game Features，开启Modular Gameplay 插件
 
 2. 添加插件，根据使用的是Cpp还是blueprint选择创建哪个插件，注意不要将生成的GameFeature路径离开原本的..\GameFeatures
-![[GameFeature学习.png|550]]
+![GameFeature学习](/images/GameFeature学习.png)
 
 3. 进入项目设置中搜索AssetManager，检查下是否项目中有能够搜索GameFeatureData的设置，如果没有需要手动添加.为什么需要确保这边AssetManager有GameFeatureData主资产类型呢？因为 ：**GameFeature强依赖于资产管理器的资源探测 ，然后加载释放对应的资产**
 
@@ -31,7 +31,7 @@ published: true
 
   *
 
-    ![[GameFeature学习-1.png|704]]
+    ![GameFeature学习-1](/images/GameFeature学习-1.png)
 
 * 激活GameFeature：
 
@@ -50,7 +50,7 @@ published: true
 * UGameFeatureData缩写GFD, 纯数据资产配置，一个插件里面一个，作用：描述GF要做的动作和需要的数据资产
 
 * UGameFeatureAction缩写GFA, 单个动作。引擎内已经预设了几个Action，我们可以拓展使用，预设的用的较多的就是添加组件，添加数据注册等
-	![[GameFeature学习-2.png]]
+	![GameFeature学习-2](/images/GameFeature学习-2.png)
 
 * UGameFeatureSubsystem缩写 GFS, GF框架的管理类，全局的API都在这里
 

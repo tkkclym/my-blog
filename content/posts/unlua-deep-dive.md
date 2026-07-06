@@ -28,11 +28,11 @@ Camera中有一段这个：
 ``
 注意：**setmetatable 只是登记关系**；`__index` 才是告诉 Lua "去哪找" 的导航。没有` __index`，元表就是个摆设
 
-![[unlua相关.png|997]]
+![unlua相关](/images/unlua相关.png)
 
 
 ## 错误写法：
-![[unlua相关-1.png]]
+![unlua相关-1](/images/unlua相关-1.png)
 思路方向对了——你意识到了` __index` 要放在某个地方。**但是!!**
 如果把`{__index = self.l_selfBaseCamera }` 放到local l_selfBaseCamera中有两个错误！
 1. 这样放进去就相当于是是 l_selfBaseCamera 的第 4 个元素（l_selfBaseCamera[4]），是一个普普通通的值——跟元表机制没有任何关系。
@@ -92,7 +92,7 @@ Camera中有一段这个：
 在访问C++相关的引用的时候unlua返回的是已经包装好的proxy table
 	我们在写的时候是 local w =self.MyButton ，但是unlua别后执行的是返回一个proxytable 也就是metatable已经设好了 `__index`是读C++反射，`__newindex` 是写C++反射  `__gc`是管理生命周期
 这个就像什么呢，写C++的时候不用关心vtable是怎么构造的，如果是  obj->DoSomething();  // 虚函数调用，vtable 在背后工作， 你从来看不到 vtable，但知道它存在。
-![[unlua怎么和UE交互.png]]
+![unlua怎么和UE交互](/images/unlua怎么和UE交互.png)
 
 
 ## userdata  ，proxy table ,元表 三者有什么关系呢？
@@ -115,7 +115,7 @@ proxytable一般就是我们获取的C++的引用， widget.Health = 30我们访
  end              
 	```
 	
-	![[userdata元表proxytable之间的关系.png]]
+	![userdata元表proxytable之间的关系](/images/userdata元表proxytable之间的关系.png)
 ## 模拟lua虚拟机 **写** 操作追踪
 	widget.Health = 30
 1. Lua VM :  widget是什么？是Proxy table
@@ -160,16 +160,16 @@ Lua GC 回收 proxy table 时仅解除引用，不销毁 C++ 对象。
  对，返回值就是通过 Lua 栈传回来的。这个栈是 Lua 和 C++ 之间唯一的通信通道。
  > 那Lua 栈是什么？
  一个双向传送带，C++ 和 Lua 各自往上面放东西、取东西
-![[Lua栈动画演示.html]]
+:information_source: 关联文档：Lua栈动画演示.html
 
 
 
 那是栈就意味着是单线程、为什么这样设计？
 1. luaVM是单线程
 2. unlua绑定在UE游戏线程上
-	1. ![[unlua相关-2.png]]
+	1. ![unlua相关-2](/images/unlua相关-2.png)
 3. UObject::ProcessEvent 不是异步的
-	1. ![[unlua相关-3.png]]
+	1. ![unlua相关-3](/images/unlua相关-3.png)
 频繁的 Lua ↔ C++ 跨语言调用有开销，每一次都要：
   4. 参数压栈 / 类型转换
   5. 反射查 UFunction
@@ -188,7 +188,7 @@ lua调用C++函数和C++调用lua函数是在C:\Users\yinming.li\Desktop\Project
 	- 如果是**静态函数**，就不需要实例，所以就是从**CDO** （Class default Object) 获取指针的 `Object = Function->GetOuterUClass()->GetDefaultObject();`
 	- 如果是非静态函数，也就是**实例函数**，从 Lua 栈位置 1 取出 `UObject*`：`Object = UnLua::GetUObject(L, 1, false);` 直接获取Object指针
 	-   这就是我们之前说的——**Lua 栈位置 1 压的是 self（proxy table）**，UnLua 从这里取 UObject*。    【😮 原来说的就是这里，之前动画演示是lua压进栈的第一个是self】
-	- ![[LuaVM 自动把Obj作为第一个参数压入栈.png]]
+	- ![LuaVM 自动把Obj作为第一个参数压入栈](/images/LuaVM 自动把Obj作为第一个参数压入栈.png)
 - 接着就是一个简单的判断指针是否可用的逻辑，不可用就报错
 - 对函数类型做分支处理，通过指针调用函数GetFunctionCallspace 对即将执行的函数做区分，判断该函数应当本地调用、远程调用，还是直接忽略调用。
 	- 生成俩bool: bRemote 和 bLocal
