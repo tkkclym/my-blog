@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { MarkdownRenderer } from "@/components/markdown/markdown-renderer";
 import { CommentSection } from "@/components/blog/comment-section";
 import { ViewCounter } from "@/components/blog/view-counter";
+import { ReadingProgress } from "@/components/blog/reading-progress";
 import { getPostBySlug, getAllPosts } from "@/lib/posts";
 import { getViews, getComments } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
@@ -44,6 +45,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <article className="container mx-auto px-4 py-12 md:py-20">
+      {/* 阅读进度指示器 */}
+      <ReadingProgress />
+
       {/* 返回按钮 */}
       <Link
         href="/blog"
