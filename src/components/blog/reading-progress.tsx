@@ -98,18 +98,14 @@ export function ReadingProgress() {
             style={{ height: `${progress}%` }}
           />
 
-          {/* 发光圆点（跟随进度移动） */}
-          {progress > 0 && (
-            <div
-              className="absolute -left-[6px] w-4 h-4 rounded-full bg-gradient-to-br from-emerald-300 to-teal-500 shadow-[0_0_16px_rgba(52,211,153,0.7),0_0_32px_rgba(52,211,153,0.3)] transition-[bottom] duration-200 ease-out border-2 border-background"
-              style={{
-                bottom: `${progress}%`,
-                transform: progress === 100
-                  ? "translateY(50%)"
-                  : "translateY(8px)",
-              }}
-            />
-          )}
+          {/* 发光圆点（跟随进度移动，入站始终可见） */}
+          <div
+            className="absolute -left-[6px] w-4 h-4 rounded-full bg-gradient-to-br from-emerald-300 to-teal-500 shadow-[0_0_16px_rgba(52,211,153,0.7),0_0_32px_rgba(52,211,153,0.3)] transition-[bottom] duration-200 ease-out border-[2.5px] border-background"
+            style={{
+              bottom: `${progress}%`,
+              transform: "translateY(50%)",
+            }}
+          />
         </div>
 
         {/* 百分比数字 */}
