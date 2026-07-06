@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 160 84% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 160 84% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 84% 10%;
+    --primary: 152 76% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 152 40% 94%;
+    --secondary-foreground: 160 84% 10%;
+    --muted: 152 20% 96%;
+    --muted-foreground: 160 5% 45%;
+    --accent: 152 76% 95%;
+    --accent-foreground: 152 76% 30%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 152 20% 90%;
+    --input: 152 20% 90%;
+    --ring: 152 76% 40%;
+    --radius: 0.75rem;
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  }
+
+  .dark {
+    --background: 165 50% 4%;
+    --foreground: 150 30% 95%;
+    --card: 165 35% 7%;
+    --card-foreground: 150 30% 95%;
+    --popover: 165 45% 6%;
+    --popover-foreground: 150 30% 95%;
+    --primary: 152 76% 45%;
+    --primary-foreground: 165 50% 4%;
+    --secondary: 165 30% 12%;
+    --secondary-foreground: 150 30% 95%;
+    --muted: 165 25% 12%;
+    --muted-foreground: 150 15% 60%;
+    --accent: 152 40% 15%;
+    --accent-foreground: 152 76% 80%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 152 25% 15%;
+    --input: 152 25% 15%;
+    --ring: 152 76% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* ========== 自定义科技感样式 ========== */
+
+/* 网格背景 */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 径向渐变光晕 */
+.tech-glow {
+  background: radial-gradient(
+    circle at 50% 0%,
+    hsl(var(--primary) / 0.15),
+    transparent 50%
+  );
+}
+
+/* 玻璃拟态卡片 */
+.glass-card {
+  background: hsl(var(--card) / 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.5);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: hsl(var(--primary) / 0.4);
+  box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.2);
+}
+
+/* 发光文字 */
+.glow-text {
+  text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    hsl(152 76% 45%),
+    hsl(140 70% 55%),
+    hsl(160 80% 50%)
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* 扫描线效果 */
+.scan-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary)),
+    transparent
+  );
+  animation: scanLine 3s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* ========== Markdown 渲染样式 ========== */
+
+.markdown-body {
+  @apply text-foreground leading-relaxed;
+}
+
+.markdown-body h1 {
+  @apply text-3xl md:text-4xl font-bold mb-6 mt-10 gradient-text;
+}
+
+.markdown-body h2 {
+  @apply text-2xl md:text-3xl font-bold mb-4 mt-8 border-b border-border pb-2;
+}
+
+.markdown-body h3 {
+  @apply text-xl md:text-2xl font-semibold mb-3 mt-6 text-primary;
+}
+
+.markdown-body h4 {
+  @apply text-lg font-semibold mb-2 mt-4;
+}
+
+.markdown-body p {
+  @apply mb-4 leading-7;
+}
+
+.markdown-body a {
+  @apply text-primary underline decoration-primary/30 hover:decoration-primary transition-all;
+}
+
+.markdown-body ul {
+  @apply list-disc list-inside mb-4 space-y-1;
+}
+
+.markdown-body ol {
+  @apply list-decimal list-inside mb-4 space-y-1;
+}
+
+.markdown-body blockquote {
+  @apply border-l-4 border-primary/50 pl-4 py-2 my-4 bg-muted/50 rounded-r-lg italic;
+}
+
+.markdown-body code {
+  @apply bg-muted px-2 py-0.5 rounded text-sm font-mono text-primary;
+}
+
+.markdown-body pre {
+  @apply bg-muted/80 p-4 rounded-lg overflow-x-auto my-4 border border-border;
+}
+
+.markdown-body pre code {
+  @apply bg-transparent p-0 text-foreground;
+}
+
+.markdown-body table {
+  @apply w-full border-collapse my-4;
+}
+
+.markdown-body th {
+  @apply border border-border bg-muted px-4 py-2 text-left font-semibold;
+}
+
+.markdown-body td {
+  @apply border border-border px-4 py-2;
+}
+
+.markdown-body img {
+  @apply rounded-lg max-w-full my-4 border border-border;
+}
+
+.markdown-body video {
+  @apply rounded-lg max-w-full my-4 border border-border;
+}
+
+.markdown-body hr {
+  @apply border-border my-8;
+}
+
+/* Obsidian Callout 样式 */
+.callout {
+  @apply rounded-lg p-4 my-4 border-l-4;
+}
+
+.callout-title {
+  @apply font-semibold mb-2 flex items-center gap-2;
+}
+
+.callout-note {
+  @apply bg-blue-500/10 border-blue-500;
+}
+
+.callout-warning {
+  @apply bg-yellow-500/10 border-yellow-500;
+}
+
+.callout-tip {
+  @apply bg-primary/10 border-primary;
+}
+
+.callout-danger {
+  @apply bg-red-500/10 border-red-500;
+}
+
+/* 代码高亮 */
+.hljs {
+  background: transparent !important;
+}
