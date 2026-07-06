@@ -12,8 +12,8 @@
 - Obsidian 兼容：双链 `[[...]]`、嵌入 `![[...]]`、Callout `> [!note]`、高亮 `==...==`
 
 ### 2. 交互功能
-- 浏览次数统计（API + JSON 存储）
-- 评论系统（发表/展示评论，本地 JSON 存储）
+- 浏览次数统计（Vercel KV 持久化，开发环境用本地文件）
+- 评论系统（发表/展示评论，Vercel KV 存储）
 
 ### 3. 个人主页
 - Hero 动画区域
@@ -91,10 +91,22 @@ published: true
 
 ```bash
 npm install      # 安装依赖
-npm run dev      # 开发模式
+npm run dev      # 开发模式（本地文件存储）
 npm run build    # 生产构建
 npm run start    # 生产服务器
 ```
+
+## 部署
+
+详见 [DEPLOY.md](./DEPLOY.md)，核心步骤：
+
+1. **推送 GitHub**：`git push` 到公开仓库
+2. **Vercel 导入**：https://vercel.com/new 选择仓库，一键部署
+3. **创建 KV 数据库**：Vercel Dashboard → Storage → Create KV → Connect
+4. **重新部署**：让环境变量生效
+5. **（可选）绑定域名**：Settings → Domains
+
+部署后获得 `https://your-blog.vercel.app`，全世界可访问。
 
 ## 技术栈
 
