@@ -62,47 +62,6 @@
   }
 }
 
-/* ========== 噪点纹理层 ========== */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ========== CRT 扫描线（微妙） ========== */
-.crt-lines {
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.03;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    hsl(var(--primary) / 0.5) 2px,
-    hsl(var(--primary) / 0.5) 3px
-  );
-}
-
-/* ========== 网格背景 ========== */
-.tech-grid-bg {
-  background-image:
-    linear-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--primary) / 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-/* ========== 径向光晕 ========== */
-.tech-glow {
-  background:
-    radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 100%, hsl(var(--primary) / 0.06) 0%, transparent 40%);
-}
-
 /* ========== 玻璃卡片 ========== */
 .glass-card {
   background: hsl(var(--card) / 0.55);
@@ -117,6 +76,20 @@
   box-shadow:
     0 0 40px -8px hsl(var(--primary) / 0.18),
     inset 0 1px 0 hsl(var(--primary) / 0.06);
+}
+
+/* 卡片占位用的网格纹理 */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Hero 区域光晕 */
+.tech-glow {
+  background:
+    radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.12) 0%, transparent 60%);
 }
 
 /* ========== 渐变文字 ========== */
