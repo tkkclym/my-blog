@@ -4,29 +4,31 @@ export function BackgroundEffects() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
       {/* 网格背景 */}
-      <div className="absolute inset-0 tech-grid-bg opacity-40" />
+      <div className="absolute inset-0 tech-grid-bg opacity-50" />
 
-      {/* 顶部光晕 */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] tech-glow" />
+      {/* 顶部聚光 */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[700px] tech-glow" />
 
-      {/* 浮动光球 */}
-      <div className="absolute top-[20%] left-[5%] w-72 h-72 bg-primary/10 rounded-full blur-[100px] animate-float" />
+      {/* 浮动磷光球体 */}
+      <div className="absolute top-[15%] left-[8%] w-80 h-80 bg-primary/12 rounded-full blur-[110px] animate-float" />
       <div
-        className="absolute top-[60%] right-[10%] w-96 h-96 bg-emerald-500/8 rounded-full blur-[120px] animate-float"
-        style={{ animationDelay: "2s" }}
+        className="absolute top-[55%] right-[5%] w-[420px] h-[420px] bg-primary/6 rounded-full blur-[130px] animate-float"
+        style={{ animationDelay: "2.5s" }}
       />
       <div
-        className="absolute bottom-[10%] left-[30%] w-80 h-80 bg-green-500/8 rounded-full blur-[110px] animate-float"
-        style={{ animationDelay: "4s" }}
+        className="absolute bottom-[5%] left-[25%] w-72 h-72 bg-emerald-500/10 rounded-full blur-[100px] animate-float"
+        style={{ animationDelay: "4.5s" }}
+      />
+      <div
+        className="absolute top-[30%] right-[30%] w-48 h-48 bg-teal-400/8 rounded-full blur-[80px] animate-float"
+        style={{ animationDelay: "1s" }}
       />
 
       {/* 噪点纹理 */}
-      <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      <div className="noise-overlay" />
+
+      {/* CRT 扫描线 */}
+      <div className="crt-lines" />
     </div>
   );
 }

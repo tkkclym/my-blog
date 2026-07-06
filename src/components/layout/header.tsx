@@ -29,8 +29,8 @@ export function Header() {
             </div>
             <div className="absolute inset-0 rounded-lg bg-primary/30 blur-md group-hover:bg-primary/50 transition-all -z-10" />
           </div>
-          <span className="font-bold text-lg gradient-text hidden sm:block">
-            TechBlog
+          <span className="font-bold text-lg gradient-text hidden sm:block tracking-wider" style={{ fontFamily: "var(--font-display)" }}>
+            TECHBLOG
           </span>
         </Link>
 

@@ -67,7 +67,7 @@ export function Timeline() {
             <Briefcase className="w-4 h-4" />
             <span>个人履历</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 font-display">
             <span className="gradient-text">旅程</span>与成长
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">

@@ -4,50 +4,51 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 160 84% 10%;
+    --background: 160 30% 97%;
+    --foreground: 150 25% 8%;
     --card: 0 0% 100%;
-    --card-foreground: 160 84% 10%;
+    --card-foreground: 150 25% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 160 84% 10%;
-    --primary: 152 76% 40%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 152 40% 94%;
-    --secondary-foreground: 160 84% 10%;
-    --muted: 152 20% 96%;
-    --muted-foreground: 160 5% 45%;
-    --accent: 152 76% 95%;
-    --accent-foreground: 152 76% 30%;
+    --popover-foreground: 150 25% 8%;
+    --primary: 144 100% 38%;
+    --primary-foreground: 150 30% 6%;
+    --secondary: 144 20% 93%;
+    --secondary-foreground: 150 25% 12%;
+    --muted: 140 15% 94%;
+    --muted-foreground: 150 8% 48%;
+    --accent: 144 60% 92%;
+    --accent-foreground: 144 70% 25%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 152 20% 90%;
-    --input: 152 20% 90%;
-    --ring: 152 76% 40%;
+    --border: 140 12% 87%;
+    --input: 140 12% 87%;
+    --ring: 144 100% 38%;
     --radius: 0.75rem;
-    --font-sans: "Inter", system-ui, sans-serif;
+    --font-sans: "Outfit", system-ui, sans-serif;
+    --font-display: "Oxanium", system-ui, sans-serif;
     --font-mono: "JetBrains Mono", "Fira Code", monospace;
   }
 
   .dark {
-    --background: 165 50% 4%;
-    --foreground: 150 30% 95%;
-    --card: 165 35% 7%;
-    --card-foreground: 150 30% 95%;
-    --popover: 165 45% 6%;
-    --popover-foreground: 150 30% 95%;
-    --primary: 152 76% 45%;
-    --primary-foreground: 165 50% 4%;
-    --secondary: 165 30% 12%;
-    --secondary-foreground: 150 30% 95%;
-    --muted: 165 25% 12%;
-    --muted-foreground: 150 15% 60%;
-    --accent: 152 40% 15%;
-    --accent-foreground: 152 76% 80%;
-    --destructive: 0 62% 50%;
+    --background: 150 30% 2.5%;
+    --foreground: 145 25% 92%;
+    --card: 150 30% 5%;
+    --card-foreground: 145 25% 92%;
+    --popover: 150 30% 6%;
+    --popover-foreground: 145 25% 92%;
+    --primary: 144 100% 42%;
+    --primary-foreground: 150 30% 3%;
+    --secondary: 150 25% 10%;
+    --secondary-foreground: 145 25% 92%;
+    --muted: 150 20% 10%;
+    --muted-foreground: 145 12% 58%;
+    --accent: 144 30% 13%;
+    --accent-foreground: 144 70% 72%;
+    --destructive: 0 72% 48%;
     --destructive-foreground: 0 0% 98%;
-    --border: 152 25% 15%;
-    --input: 152 25% 15%;
-    --ring: 152 76% 45%;
+    --border: 144 18% 14%;
+    --input: 144 18% 14%;
+    --ring: 144 100% 42%;
   }
 }
 
@@ -57,63 +58,91 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "ss01" 1, "ss02" 1, "rlig" 1, "calt" 1;
   }
 }
 
-/* ========== 自定义科技感样式 ========== */
-
-/* 网格背景 */
-.tech-grid-bg {
-  background-image:
-    linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* ========== 噪点纹理层 ========== */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* 径向渐变光晕 */
-.tech-glow {
-  background: radial-gradient(
-    circle at 50% 0%,
-    hsl(var(--primary) / 0.15),
-    transparent 50%
+/* ========== CRT 扫描线（微妙） ========== */
+.crt-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.03;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    hsl(var(--primary) / 0.5) 2px,
+    hsl(var(--primary) / 0.5) 3px
   );
 }
 
-/* 玻璃拟态卡片 */
+/* ========== 网格背景 ========== */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ========== 径向光晕 ========== */
+.tech-glow {
+  background:
+    radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 100%, hsl(var(--primary) / 0.06) 0%, transparent 40%);
+}
+
+/* ========== 玻璃卡片 ========== */
 .glass-card {
-  background: hsl(var(--card) / 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid hsl(var(--border) / 0.5);
-  transition: all 0.3s ease;
+  background: hsl(var(--card) / 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsl(var(--border) / 0.4);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  border-color: hsl(var(--primary) / 0.4);
-  box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.2);
+  border-color: hsl(var(--primary) / 0.45);
+  box-shadow:
+    0 0 40px -8px hsl(var(--primary) / 0.18),
+    inset 0 1px 0 hsl(var(--primary) / 0.06);
 }
 
-/* 发光文字 */
-.glow-text {
-  text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
-}
-
-/* 渐变文字 */
+/* ========== 渐变文字 ========== */
 .gradient-text {
   background: linear-gradient(
     135deg,
-    hsl(152 76% 45%),
-    hsl(140 70% 55%),
-    hsl(160 80% 50%)
+    hsl(144 100% 45%),
+    hsl(150 90% 55%),
+    hsl(130 80% 65%),
+    hsl(144 100% 45%)
   );
-  background-size: 200% 200%;
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientShift 8s ease infinite;
+  animation: gradientShift 6s ease infinite;
 }
 
-/* 扫描线效果 */
+/* ========== 发光文字 ========== */
+.glow-text {
+  text-shadow:
+    0 0 24px hsl(var(--primary) / 0.5),
+    0 0 48px hsl(var(--primary) / 0.2);
+}
+
+/* ========== 扫描线动画 ========== */
 .scan-line::before {
   content: "";
   position: absolute;
@@ -124,38 +153,39 @@
   background: linear-gradient(
     90deg,
     transparent,
-    hsl(var(--primary)),
+    hsl(var(--primary) / 0.8),
     transparent
   );
-  animation: scanLine 3s ease-in-out infinite;
+  animation: scanDown 4s ease-in-out infinite;
 }
 
-@keyframes scanLine {
-  0% { transform: translateY(0); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
+@keyframes scanDown {
+  0%   { transform: translateY(-4px); opacity: 0; }
+  20%  { opacity: 0.6; }
+  80%  { opacity: 0.6; }
+  100% { transform: translateY(calc(100% + 4px)); opacity: 0; }
 }
 
-/* 自定义滚动条 */
+/* ========== 滚动条 ========== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.3);
-  border-radius: 4px;
+  background: hsl(var(--primary) / 0.25);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.5);
+  background: hsl(var(--primary) / 0.45);
 }
 
-/* ========== Markdown 渲染样式 ========== */
+/* ========== Markdown 正文 ========== */
 
 .markdown-body {
   @apply text-foreground leading-relaxed;
@@ -163,14 +193,18 @@
 
 .markdown-body h1 {
   @apply text-3xl md:text-4xl font-bold mb-6 mt-10 gradient-text;
+  font-family: var(--font-display);
 }
 
 .markdown-body h2 {
-  @apply text-2xl md:text-3xl font-bold mb-4 mt-8 border-b border-border pb-2;
+  @apply text-2xl md:text-3xl font-bold mb-4 mt-8 pb-2;
+  border-bottom: 2px solid hsl(var(--primary) / 0.2);
+  font-family: var(--font-display);
 }
 
 .markdown-body h3 {
   @apply text-xl md:text-2xl font-semibold mb-3 mt-6 text-primary;
+  font-family: var(--font-display);
 }
 
 .markdown-body h4 {
@@ -194,15 +228,16 @@
 }
 
 .markdown-body blockquote {
-  @apply border-l-4 border-primary/50 pl-4 py-2 my-4 bg-muted/50 rounded-r-lg italic;
+  @apply border-l-[3px] border-primary/40 pl-4 py-2 my-4 bg-primary/5 rounded-r-lg;
+  font-style: italic;
 }
 
 .markdown-body code {
-  @apply bg-muted px-2 py-0.5 rounded text-sm font-mono text-primary;
+  @apply bg-primary/10 px-2 py-0.5 rounded text-sm font-mono text-primary;
 }
 
 .markdown-body pre {
-  @apply bg-muted/80 p-4 rounded-lg overflow-x-auto my-4 border border-border;
+  @apply bg-muted p-5 rounded-lg overflow-x-auto my-5 border border-border/50;
 }
 
 .markdown-body pre code {
@@ -222,18 +257,18 @@
 }
 
 .markdown-body img {
-  @apply rounded-lg max-w-full my-4 border border-border;
+  @apply rounded-lg max-w-full my-4 border border-border/40;
 }
 
 .markdown-body video {
-  @apply rounded-lg max-w-full my-4 border border-border;
+  @apply rounded-lg max-w-full my-4 border border-border/40;
 }
 
 .markdown-body hr {
-  @apply border-border my-8;
+  @apply border-border/40 my-8;
 }
 
-/* Obsidian Callout 样式 */
+/* Obsidian Callout */
 .callout {
   @apply rounded-lg p-4 my-4 border-l-4;
 }
@@ -242,23 +277,70 @@
   @apply font-semibold mb-2 flex items-center gap-2;
 }
 
-.callout-note {
-  @apply bg-blue-500/10 border-blue-500;
-}
+.callout-note  { @apply bg-blue-500/10 border-blue-500; }
+.callout-warning { @apply bg-yellow-500/10 border-yellow-500; }
+.callout-tip  { @apply bg-primary/10 border-primary; }
+.callout-danger { @apply bg-red-500/10 border-red-500; }
 
-.callout-warning {
-  @apply bg-yellow-500/10 border-yellow-500;
-}
-
-.callout-tip {
-  @apply bg-primary/10 border-primary;
-}
-
-.callout-danger {
-  @apply bg-red-500/10 border-red-500;
-}
-
-/* 代码高亮 */
 .hljs {
   background: transparent !important;
+}
+
+/* ========== 动画 ========== */
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-20px) scale(1.03); }
+}
+
+@keyframes glitch-shift {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-2px, 2px); }
+  40%  { transform: translate(2px, -1px); }
+  60%  { transform: translate(-1px, -2px); }
+  80%  { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  3%       { opacity: 0.3; }
+  6%       { opacity: 1; }
+  7%       { opacity: 0.6; }
+  8%       { opacity: 1; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  3%       { opacity: 0.3; }
+  6%       { opacity: 1; }
+  7%       { opacity: 0.6; }
+  8%       { opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px hsl(var(--primary) / 0.3); }
+  50%      { box-shadow: 0 0 20px hsl(var(--primary) / 0.6), 0 0 40px hsl(var(--primary) / 0.3); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glitch {
+  animation: glitch-shift 0.3s ease-in-out;
+}
+
+.animate-flicker {
+  animation: flicker 4s linear infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
 }

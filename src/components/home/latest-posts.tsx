@@ -30,7 +30,7 @@ export function LatestPosts({ posts }: LatestPostsProps) {
             <Tag className="w-4 h-4" />
             <span>最新文章</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 font-display">
             <span className="gradient-text">技术</span>随笔
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">

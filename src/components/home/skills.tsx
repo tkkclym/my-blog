@@ -72,7 +72,7 @@ export function Skills() {
             <Boxes className="w-4 h-4" />
             <span>技术栈</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 font-display">
             <span className="gradient-text">技能</span>与专长
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">

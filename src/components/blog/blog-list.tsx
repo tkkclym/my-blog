@@ -49,7 +49,7 @@ export function BlogList({ posts, tags, categories }: BlogListProps) {
           <FileText className="w-4 h-4" />
           <span>博客文章</span>
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 font-display">
           <span className="gradient-text">所有</span>文章
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
