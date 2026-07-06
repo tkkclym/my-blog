@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
@@ -12,6 +13,24 @@ interface MarkdownRendererProps {
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const slugify = (text: string) =>
+    text
+      .toLowerCase()
+      .replace(/[^\w\u4e00-\u9fff]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const heading = (level: number) =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function Heading(props: any) {
+      const text = React.Children.toArray(props.children)
+        .map((child) => (typeof child === "string" ? child : ""))
+        .join("");
+      const id = slugify(text);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = `h${level}` as any;
+      return <Tag id={id} {...props}>{props.children}</Tag>;
+    };
+
   return (
     <div className="markdown-body">
       <ReactMarkdown
@@ -21,6 +40,10 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           [rehypeHighlight, { detect: true, ignoreMissing: true }],
         ]}
         components={{
+          // 标题带 id（供 TOC 导航使用）
+          h1: heading(1),
+          h2: heading(2),
+          h3: heading(3),
           // 自定义链接渲染
           a: ({ node, ...props }) => (
             <a {...props} target="_blank" rel="noopener noreferrer" />
